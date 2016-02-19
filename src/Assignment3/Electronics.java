@@ -1,10 +1,10 @@
 package Assignment3;
 
-public class Electronics extends Item 
-{
+public class Electronics extends Item {
 
-	// Variables, constructors etc. here.
-	
-	//Implement calculate price/print methods as necessary
+	public Electronics(String name, double price, double weight, int quantity) {
+		super(name, price, weight, quantity);
+		// TODO Auto-generated constructor stub
+	}
 
 }
