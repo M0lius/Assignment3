@@ -78,28 +78,22 @@ public class Electronics extends Item {
 	}
 	
 	//*******
-	public static boolean taxableState(String stateIn)
-	{
+	public static boolean taxableState(String stateIn) {
 		// assumes valid State input 
-		if( Arrays.asList(nonTaxableStates).contains(stateIn.toUpperCase()) )
-		{
+		if( Arrays.asList(nonTaxableStates).contains(stateIn.toUpperCase()) ) {
 			return false;
 		}
-		else
-		{
+		else {
 			return true;
 		}
 	}
 	
 	//*******
-	public static boolean validState(String stateIn)
-	{
-		if( Arrays.asList(stateCodes).contains(stateIn.toUpperCase()) )
-		{
+	public static boolean validState(String stateIn) {
+		if( Arrays.asList(stateCodes).contains(stateIn.toUpperCase()) ) {
 			return true;
 		}
-		else
-		{
+		else {
 			return false;
 		}
 	}
