@@ -38,6 +38,12 @@ public class Item
 	public double getWeight() {
 		return weight;
 	}
+	
+	public double getStandardShippingCost() {
+		
+		// Standard shipping cost is calculated: (20*(weight)) * quantity;
+		return ( (20*this.getWeight()) * this.getQuantity() );
+	}
 
 	public Item(String name, double price, double weight, int quantity) {
 		this.name = name;

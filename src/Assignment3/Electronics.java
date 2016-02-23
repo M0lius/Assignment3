@@ -13,6 +13,8 @@ public class Electronics extends Item {
 	
 	public boolean fragile;
 	
+	//*****
+	//Constructor
 	public Electronics(String name, double price, double weight, int quantity, String fragileString) {
 		super(name, price, weight, quantity);
 		// TODO Auto-generated constructor stub
@@ -27,11 +29,55 @@ public class Electronics extends Item {
 		}
 	}
 
+	//*****
+	//Getters & Setters
 	public boolean isFragile() {
 		return fragile;
 	}
 	
-	// state specific methods
+		// Electronics special attributes:
+	// fragile electronics require premium shipping
+	// sales tax is 10% for clothing and electronics 
+	// premium shipping is and additional 20% over standard shipping
+	// standard shipping is (20*weight)*quantity
+	
+	//*******
+	public double getSalesTax( String stateTax ) {
+		
+		if( Electronics.taxableState( stateTax ) ) {
+			return ( this.getPrice() * 0.10 );
+		}
+		else if( !Electronics.taxableState( stateTax ) ) {
+			return 0;
+		}
+		else {
+			return -1;
+		}
+	}
+	
+	//*******
+	public double getFittingShippingCost() {
+		
+		// must take into account state, assuming input string is a valid state (error handling class)
+		if( this.isFragile() ) {
+			return this.getPremiumShippingCost();
+		}
+		else if( !this.isFragile() ) {
+			return this.getStandardShippingCost();
+		}
+		else {
+			return -1; // error case
+		}
+		
+	}
+	
+	//*******
+	public double getPremiumShippingCost() {
+		// premium shipping is an additional 20% over the standard charge
+		return ( this.getStandardShippingCost() * 1.20 );
+	}
+	
+	//*******
 	public static boolean taxableState(String stateIn)
 	{
 		// assumes valid State input 
@@ -45,6 +91,7 @@ public class Electronics extends Item {
 		}
 	}
 	
+	//*******
 	public static boolean validState(String stateIn)
 	{
 		if( Arrays.asList(stateCodes).contains(stateIn.toUpperCase()) )

@@ -22,4 +22,28 @@ public class Groceries extends Item {
 		return perishable;
 	}
 
+		// Groceries special attributes:
+	// perishable groceries require premium shipping
+	// groceries incur no sales 
+	
+	//*******
+	public double getFittingShippingCost() {
+		
+		if( this.isPerishable() ) {
+			return ( this.getPremiumShippingCost() );
+		}
+		else if( !this.isPerishable() ) {
+			return ( this.getStandardShippingCost() );
+		}
+		else {
+			return -1; // error case
+		}
+	}
+	
+	//*******
+	public double getPremiumShippingCost() {
+		// premium shipping is an additional 20% over the standard charge
+		return ( this.getStandardShippingCost() * 1.20 );
+	}
+	
 }
