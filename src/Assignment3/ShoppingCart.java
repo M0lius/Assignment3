@@ -31,18 +31,8 @@ class ShoppingCart
 			int weight, String opt1, String opt2 ) {
 		
 		switch( category.toUpperCase() ) {
-			case "GROCERIES": 	
-				if( !Groceries.validPerishability(opt1) ) {
-					System.out.println("invalid input.");
-					return;
-				}
-				ShoppingCart.groceryList.add( new Groceries(name, price, weight, quantity, opt1) ); 		   				   break;
-			case "ELECTRONICS": 
-				if( !Electronics.validFrailty(opt1) ) {
-					System.out.println("invalid input.");
-					return;
-				}
-				ShoppingCart.electronicList.add( new Electronics(name, price, weight, quantity, opt1, opt2) ); break;
+			case "GROCERIES":   ShoppingCart.groceryList.add( new Groceries(name, price, weight, quantity, opt1) ); 		   break;
+			case "ELECTRONICS": ShoppingCart.electronicList.add( new Electronics(name, price, weight, quantity, opt1, opt2) ); break;
 			case "CLOTHING":	ShoppingCart.clothingList.add( new Clothing(name, price, weight, quantity) ); 				   break;
 		}
 	}
