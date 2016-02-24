@@ -26,41 +26,78 @@ class ShoppingCart
 	 * insert groceries cabbage 2.00 5 1 NP  -- must indicate P/NP
 	 */
 	
-	//*******
-	static void insert( String operation, String category, String name, double price, int quantity, 
+	//*****************************************************************************
+	static void insert( String category, String name, double price, int quantity, 
 			int weight, String opt1, String opt2 ) {
 		
-		switch( operation.toUpperCase() ) {
+		switch( category.toUpperCase() ) {
 			case "GROCERIES": 	ShoppingCart.groceryList.add( new Groceries(name, price, weight, quantity, opt1) ); 		   break;
 			case "ELECTRONICS": ShoppingCart.electronicList.add( new Electronics(name, price, weight, quantity, opt1, opt2) ); break;
 			case "CLOTHING":	ShoppingCart.clothingList.add( new Clothing(name, price, weight, quantity) ); 				   break;
 		}
 	}
 	
-	//*******
+	//*******************
 	static void print() {
 		
 		/* Print will print the contents of the shopping cart 
 		 * in order by name, showing all attribute values for each object as well as the total 
-		 * charges for each. This is followed by the total charges for entire the shopping cart. 
+		 * charges for each. This is followed by the total charges for the entire shopping cart. 
 		 * Output of the shopping cart should be to the standard output stream (screen) and should be 
 		 * appropriately formatted and labeled for readability.
 		 * */
+		
+		int netPrice = 0;
 	
 		int grocerySize    = ShoppingCart.groceryList.size();
 		int electronicSize = ShoppingCart.electronicList.size();
 		int clothingSize   = ShoppingCart.clothingList.size();
 		
+		int electronicRange = grocerySize + electronicSize;
+		
 		int shoppingCartLength = grocerySize + electronicSize + clothingSize;
 			
 		for( int x = 0; x < shoppingCartLength; x++ ) {
 			
-			if( x < grocerySize ) {
-				
-			}
-//			else if ( (x >= grocerySize) && 
+			// quantity, name, price after tax and shipping
+			// at the end: total shopping cart price
 			
+			String name  = "";
+			double price = 0;
+			int quantity = 0;
+			
+			if( x < grocerySize ) { 
+				// Groceries
+				name 	 = ShoppingCart.groceryList.get(x).getName();
+				quantity = ShoppingCart.groceryList.get(x).getQuantity();		
+				price	 = ShoppingCart.groceryList.get(x).getPrice()*quantity 
+							+ ShoppingCart.groceryList.get(x).getFittingShippingCost()*quantity;
+			}
+			else if ( (x >= grocerySize) && (x < electronicRange) ) {
+				// Electronics
+				String state 	= ShoppingCart.electronicList.get(x).getState();
+				name 	 = ShoppingCart.electronicList.get(x).getName();
+				quantity = ShoppingCart.electronicList.get(x).getQuantity();
+				price	 = ShoppingCart.electronicList.get(x).getPrice()*quantity
+							+ ShoppingCart.electronicList.get(x).getFittingShippingCost()*quantity
+							+ ShoppingCart.electronicList.get(x).getSalesTax(state)*quantity;
+			}
+			else if ( (x >= electronicRange) && (x < shoppingCartLength) ) {
+				// Clothing
+				name 	 = ShoppingCart.clothingList.get(x).getName();
+				quantity = ShoppingCart.clothingList.get(x).getQuantity();
+				price	 = ShoppingCart.clothingList.get(x).getPrice()*quantity
+							+ ShoppingCart.clothingList.get(x).getStandardShippingCost()*quantity
+							+ ShoppingCart.clothingList.get(x).getSalesTax()*quantity;
+			}
+			
+			netPrice += price;
+			String items = (quantity > 1) ? " items " : " item ";
+			
+			System.out.println("The " + quantity + " " + name + items + "costs $" + price + ", including shipping and tax.");
 		}
+		
+		System.out.println("The Shopping-Cart items cost $" + netPrice + " total.");
 	}
 	
 	//*************************************************
