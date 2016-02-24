@@ -1,12 +1,15 @@
 
 package Assignment3;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 class ShoppingCart
 {
+	private static DecimalFormat df2 = new DecimalFormat("0.00"); //making my doubles to print in decimal format 
+	
 	//*******
 	static String[] operations = new String[]{"INSERT", "DELETE", "SEARCH", "UPDATE", "PRINT"};
 	static String[] categories = new String[]{"GROCERIES", "ELECTRONICS", "CLOTHING"};
