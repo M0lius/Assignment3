@@ -1,3 +1,9 @@
+/* NAMES: MARIO MOLINA
+ * AND:   ETHAN MILLER
+ * TA:    JO EGNER
+ * ASSIGNMENT 3 :Shopping Cart One
+ * */
+
 package Assignment3;
 
 import java.util.*;
@@ -5,7 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DecimalFormat;
+//import java.text.DecimalFormat;
 
 
 public class A3Driver 
@@ -40,76 +46,128 @@ public class A3Driver
 	  			e.printStackTrace();
 	  			System.exit(-1);
 	  		}
-		
-		
-		//Stub for arraylist.
-		ArrayList<Item> shoppingCart = new ArrayList<Item>(); 
-		
-		// General code example for how to iterate an array list. You will have to modify this heavily, to suit your needs.
-		Iterator<Item> i = shoppingCart.iterator();
-		while (i.hasNext()) 
-		{
-			Item temp = i.next();
-			temp.calculatePrice(); 
-			temp.printItemAttributes();
-			//This (above) works because of polymorphism: a determination is made at runtime, 
-			//based on the inherited class type, as to which method is to be invoked. Eg: If it is an instance
-			// of Grocery, it will invoke the calculatePrice () method defined in Grocery.
-		}		
-	  }
+	  }	
 	  
 	  public static void Doit(String s){
 		//Parse input, take appropriate actions.
+		int skip = 0;
 			
-			String operation = Reader.GetOperation(s);
-			if (operation.equals(null) || operation.equals("")) {
+			String operation = Reader.GetOperation(s, skip);
+			if (operation.equals(null) || operation.equals("") || !ShoppingCart.validOperation(operation)) {
 				System.out.println("Invalid Operation");
 				return;
 			}
+			skip += 1;
 			
-			String category = Reader.GetCategory(s);
-			if (category.equals(null) || category.equals("")) {
-				System.out.println("Invalid Category");
-				return;
+			if(operation.toUpperCase().equals("INSERT")){
+				String category = Reader.GetCategory(s, skip);
+				if (category.equals(null) || category.equals("")|| !ShoppingCart.validCategory(category)) {
+					System.out.println("Invalid Category");
+					return;
+				}
+				skip += 1;
+				
+				String name = Reader.GetName(s, skip);
+				if (name.equals(null) || name.equals("")) {
+					System.out.println("Invalid Name");
+					return;
+				}
+				skip += 1;
+				
+				double price = Reader.GetPrice(s, skip);
+				if (price <= 0) {
+					System.out.println("Invalid Price");
+					return;
+				}
+				skip += 1;
+				
+				int quantity = Reader.GetQuantity(s, skip);
+				if (quantity <= 0){
+					System.out.println("Invalid Quantity");
+					return;
+				}
+				skip += 1;
+				
+				int weight = Reader.GetWeight(s, skip);
+				if(weight < 0){
+					System.out.println("Invalid Weight");
+					return;
+				}
+				skip += 1;
+				
+				String oField1 = "";
+				String oField2 = "";
+				if(category.toUpperCase().equals("GROCERIES")){
+					oField1 = Reader.GetOField1(s, skip);
+					if (oField1.equals(null) || oField1.equals("")) {
+						System.out.println("Invalid Optional Field1");
+						return;
+					}
+					skip += 1;
+					
+					oField2 = "";
+					
+				} else if(category.toUpperCase().equals("ELECTRONICS")){
+					oField1 = Reader.GetOField1(s, skip);
+					if (oField1.equals(null) || oField1.equals("")) {
+						System.out.println("Invalid Optional Field1");
+						return;
+					}
+					skip += 1;
+					
+					oField2 = Reader.GetOField2(s, skip);	
+					if (oField2.equals(null) || oField2.equals("") || !Electronics.validState(oField2)) {
+						System.out.println("Invalid State");
+						return;
+						
+					}
+					skip += 1;
+				} 				
+				
+				System.out.printf("*%s*%s*%s*%.2f*%d*%d*%s*%s*\n", operation, category, name, price, quantity, weight, oField1, oField2);
+				//TODO RUN INSERT
+				
+			} else if (operation.toUpperCase().equals("UPDATE")){
+				String name = Reader.GetName(s, skip);
+				if (name.equals(null) || name.equals("")) {
+					System.out.println("Invalid Name");
+					return;
+				}
+				skip += 1;
+				
+				int quantity = Reader.GetQuantity(s, skip);
+				if (quantity <= 0){
+					System.out.println("Invalid Quantity");
+					return;
+				}
+				skip += 1;
+				
+				System.out.printf("*%s*%s*%d*\n", operation, name, quantity);
+				//TODO RUN UPDATE
+				
+			} else if(operation.toUpperCase().equals("PRINT")){
+				System.out.println("Print!");
+				//TODO run Print
+				
+			} else {
+				String name = Reader.GetName(s, skip);
+				if (name.equals(null) || name.equals("")) {
+					System.out.println("Invalid Name");
+					return;
+				}
+				skip += 1;
+				
+				System.out.printf("*%s*%s*\n", operation, name);
+				if(operation.toUpperCase().equals("DELETE")){
+					//TODO RUN DELETE
+				}
+				else{
+					//TODO RUN SEARCH
+				}
+				
 			}
-			
-			String name = Reader.GetName(s);
-			if (name.equals(null) || name.equals("")) {
-				System.out.println("Invalid Name");
-				return;
-			}
-			
-			double price = Reader.GetPrice(s);
-			if (price <= 0) {
-				System.out.println("Invalid Price");
-				return;
-			}
-			
-			int quantity = Reader.GetQuantity(s);
-			if (quantity <= 0){
-				System.out.println("Invalid Quantity");
-				return;
-			}
-			
-			double weight = Reader.GetWeight(s);
-			if(weight <= 0){
-				System.out.println("Invalid Weight");
-				return;
-			}
-			String oField1 = Reader.GetOField1(s);
-			if (oField1.equals(null) || oField1.equals("")) {
-				System.out.println("Invalid Optional Field1");
-				return;
-			}
-			
-			String oField2 = Reader.GetOField2(s);	
-			if (oField2.equals(null) || oField2.equals("")) {
-				System.out.println("Invalid Optional Field2");
-				return;
-			}
-			
 		
-			System.out.printf("*%s*%s*%s*%.2f*%d*%.2f*%s*%s*\n", operation, category, name, price, quantity, weight, oField1, oField2);		  
+				  
 	  }
 	
 	  
@@ -121,7 +179,15 @@ public class A3Driver
 
 	  public static class Reader 
 	  {
-	  	
+//	  	public static boolean Tail(String command, int skips){
+//	  		int pointer = SkipInputs(command, skips);
+//	  		char now = command.charAt(pointer);
+//	  		if (now != ' '){
+//	  			return true;
+//	  		}
+//	  		return false;
+//	  	}
+		  
 		public static int SkipInputs(String command, int inputs)// assumes all previous inputs were valid and gathered 
 		{//returns a pointer to the beginning of the next input after # skipped
 			int pointer = 0;
@@ -146,118 +212,122 @@ public class A3Driver
 			return pointer;
 		}
 		
-	  	public static String GetOperation (String command) //reads for the Operation
+	  	public static String GetOperation (String command, int skip) //reads for the Operation
 	  	{ 
-	  		int beginning = 0; //beginning of the word
-	  		int end = 0; //end of the word
+	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
+	  		int end = beginning; //end of the word
 	  		char now = command.charAt(beginning); //checks current char
-	  		
-	  		while (now == ' ' && end < (command.length() - 1)){ //goes to first non space
-	  			beginning += 1;
-	  			now = command.charAt(beginning); //checks current char
-	  		}
-	  		end = beginning;
-	  		while (now != ' '){//up too the first space it sees
+
+	  		while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
 	  			end += 1;
 	  			now = command.charAt(end);
-	  			//TODO what makes a command valid
 	  		}
-	  		
+	  		if(now != ' '){end += 1;} //incase while loop left due to reaching end of string
 	  		return command.substring(beginning, end);
 	  		
 	  	}
-	  	public static String GetCategory (String command) //reads for....
+	  	public static String GetCategory (String command, int skip) //reads for....
 	  	{ 
-	  		int beginning = Reader.SkipInputs(command, 1); //beginning of the word
+	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
 		  	while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
 		  			end += 1;
 		  			now = command.charAt(end);
-		  			//TODO what makes a category valid
 		  	}
+		  	if(now != ' '){end += 1;} //incase while loop left due to reaching end of string
 	  		return command.substring(beginning, end);
 
 	  	}
-	  	public static String GetName (String command) //reads for....
+	  	public static String GetName (String command, int skip) //reads for....
 	  	{ 
-	  		int beginning = Reader.SkipInputs(command, 2); //beginning of the word
+	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
 		  	while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
 		  			end += 1;
 		  			now = command.charAt(end);
-		  			//TODO what makes a Name valid
 		  	}
+		  	if(now != ' '){end += 1;} //incase while loop left due to reaching end of string
 	  		return command.substring(beginning, end);
 	  		
 	  	}
-	  	public static double GetPrice (String command) //reads for....
+	  	public static double GetPrice (String command, int skip) //reads for....
 	  	{ 
-	  		int beginning = Reader.SkipInputs(command, 3); //beginning of the word
+	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
 	  		int end = beginning; //end of the word
+	  		int decimals = 0; //amount of decimals found in the double. It shouldn't be more than 1
 	  		
 	  		char now = command.charAt(beginning); //checks current char
 		  	while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
 		  			end += 1;
+		  			if(!Character.isDigit(now)){ //makes sure it is a digit, and no more than one decimal
+		  				if(now == '.'){decimals += 1;} 
+		  				else {return -1;} 
+		  			}
 		  			now = command.charAt(end);
-		  			//TODO what makes a category valid
 		  	}
+		  	if(now == '.'){decimals += 1;} //check last char since it could leave due to reachin end of string
+		  	if(decimals > 1){return -1;} //return bad number if more than one decimal
+		  	
+		  	if(now != ' '){end += 1;} //incase while loop left due to reaching end of string
 	  		return Double.parseDouble(command.substring(beginning, end));
 	  	}
 	  	
-	  	public static int GetQuantity (String command) //reads for....
+	  	public static int GetQuantity (String command, int skip) //reads for....
 	  	{ 
-	  		int beginning = Reader.SkipInputs(command, 4); //beginning of the word
+	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
 		  	while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
 		  			end += 1;
+		  			if(!Character.isDigit(now)){return -1;}
 		  			now = command.charAt(end);
-		  			//TODO what makes a category valid
 		  	}
+		  	if(now != ' '){end += 1; if(!Character.isDigit(now)){return -1;}} //incase while loop left due to reaching end of string
 	  		return Integer.parseInt(command.substring(beginning, end));
 	  	}
-	  	public static double GetWeight (String command) //reads for....
+	  	public static int GetWeight (String command, int skip) //reads for....
 	  	{ 
-	  		int beginning = Reader.SkipInputs(command, 5); //beginning of the word
+	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
 		  	while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
 		  			end += 1;
+		  			if(!Character.isDigit(now)){return -1;}
 		  			now = command.charAt(end);
-		  			//TODO what makes a category valid
 		  	}
-	  		return Double.parseDouble(command.substring(beginning, end));
+		  	if(now != ' '){end += 1; if(!Character.isDigit(now)){return -1;}} //incase while loop left due to reaching end of string
+	  		return Integer.parseInt(command.substring(beginning, end));
 	  	}
-	  	public static String GetOField1 (String command) //reads for....
+	  	public static String GetOField1 (String command, int skip) //reads for....
 	  	{ 
-	  		int beginning = Reader.SkipInputs(command, 6); //beginning of the word
+	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
 		  	while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
 		  			end += 1;
 		  			now = command.charAt(end);
-		  			//TODO what makes a category valid
 		  	}
+		  	if(now != ' '){end += 1;} //incase while loop left due to reaching end of string
 	  		return command.substring(beginning, end);
 	  	}
-	  	public static String GetOField2 (String command) //reads for....
+	  	public static String GetOField2 (String command, int skip) //reads for....
 	  	{ 
-	  		int beginning = Reader.SkipInputs(command, 7); //beginning of the word
+	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
 		  	while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
 		  			end += 1;
 		  			now = command.charAt(end);
-		  			//TODO what makes a category valid
 		  	}
+		  	if(now != ' '){end += 1;} //incase while loop left due to reaching end of string
 	  		return command.substring(beginning, end);
 	  	}
 	  }

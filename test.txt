@@ -1,2 +1,8 @@
-insert clothing shirt -20.50 1 1 P TX
-delete electronic WiiU 20.50 5 2.5 F NM
+insert groceries apple 250 1 1 
+insert electronics WiiU 20.50 5 25 F TX
+delete cats
+print
+sudfafiflidsa
+insert sdfjsdf 
+insert clothing shirt 225 1 1 
+insert clothing shirt 225 1 1.0 
