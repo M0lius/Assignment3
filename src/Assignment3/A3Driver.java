@@ -19,6 +19,7 @@ public class A3Driver
 	  public static void main(String[] args) 
 	  {
 		//Open file; file name specified in args (command line)
+		//code snipped from the Translate Program
 		  if (args.length != 1) 
 	  		{
 	  			System.err.println ("Error: Incorrect number of command line arguments");
@@ -32,7 +33,7 @@ public class A3Driver
 	  			
 	  			for (String s = reader.readLine(); s != null; s = reader.readLine()) 
 	  			{
-	  			Doit(s);
+	  			Doit(s);//This will undergo parsing of the string and advance to calling functions when necessary
 	  			}
 	  		} 
 	  		catch (FileNotFoundException e) 
@@ -52,36 +53,36 @@ public class A3Driver
 		//Parse input, take appropriate actions.
 		int skip = 0;
 			
-			String operation = Reader.GetOperation(s, skip);
+			String operation = Reader.GetOperation(s, skip); //get operation field
 			if (operation.equals(null) || operation.equals("") || !ShoppingCart.validOperation(operation)) {
-				System.out.println("Invalid Operation");
-				return;
+				System.out.println("Invalid Operation"); //invalid operations so the whole string is invalid,
+				return; //leave and ask for next command, same for all the remaining if statments
 			}
 			skip += 1;
 			
 			if(operation.toUpperCase().equals("INSERT")){
-				String category = Reader.GetCategory(s, skip);
+				String category = Reader.GetCategory(s, skip); //get category field
 				if (category.equals(null) || category.equals("")|| !ShoppingCart.validCategory(category)) {
 					System.out.println("Invalid Category");
 					return;
 				}
 				skip += 1;
 				
-				String name = Reader.GetName(s, skip);
+				String name = Reader.GetName(s, skip);//get name field
 				if (name.equals(null) || name.equals("")) {
 					System.out.println("Invalid Name");
 					return;
 				}
 				skip += 1;
 				
-				double price = Reader.GetPrice(s, skip);
+				double price = Reader.GetPrice(s, skip); //get price field
 				if (price <= 0) {
 					System.out.println("Invalid Price");
 					return;
 				}
 				skip += 1;
 				
-				int quantity = Reader.GetQuantity(s, skip);
+				int quantity = Reader.GetQuantity(s, skip); //get quantity field,... etc for all Get**** function calls
 				if (quantity < 0){
 					System.out.println("Invalid Quantity");
 					return;
@@ -99,7 +100,7 @@ public class A3Driver
 				String oField2 = "";
 				if(category.toUpperCase().equals("GROCERIES")){
 					oField1 = Reader.GetOField1(s, skip);
-					if (oField1.equals(null) || oField1.equals("") || Groceries.validPerishability(oField1)) {
+					if (oField1.equals(null) || oField1.equals("") || !Groceries.validPerishability(oField1)) {
 						System.out.println("Invalid Optional Field1");
 						return;
 					}
@@ -109,7 +110,7 @@ public class A3Driver
 					
 				} else if(category.toUpperCase().equals("ELECTRONICS")){
 					oField1 = Reader.GetOField1(s, skip);
-					if (oField1.equals(null) || oField1.equals("") || Electronics.validFrailty(oField1)) {
+					if (oField1.equals(null) || oField1.equals("") || !Electronics.validFrailty(oField1)) {
 						System.out.println("Invalid Optional Field1");
 						return;
 					}
@@ -123,6 +124,8 @@ public class A3Driver
 					}
 					skip += 1;
 				} 				
+				
+				if(Reader.Tail(s, skip)){System.out.println("Invalid Extra Input"); return;} //invalid extra input
 				
 				System.out.printf("*%s*%s*%s*%.2f*%d*%d*%s*%s*\n", operation, category, name, price, quantity, weight, oField1, oField2);
 				ShoppingCart.insert(category, name, price, quantity, weight, oField1, oField2);
@@ -142,10 +145,14 @@ public class A3Driver
 				}
 				skip += 1;
 				
+				if(Reader.Tail(s, skip)){System.out.println("Invalid Extra Input"); return;} //invalid extra input
+				
 				System.out.printf("*%s*%s*%d*\n", operation, name, quantity);
 				ShoppingCart.update(name, quantity);
 				
 			} else if(operation.toUpperCase().equals("PRINT")){
+				
+				if(Reader.Tail(s, skip)){System.out.println("Invalid Extra Input"); return;} //invalid extra input
 				System.out.println("Print!");
 				ShoppingCart.print();
 				
@@ -156,6 +163,8 @@ public class A3Driver
 					return;
 				}
 				skip += 1;
+				
+				if(Reader.Tail(s, skip)){System.out.println("Invalid Extra Input"); return;} //invalid extra input
 				
 				System.out.printf("*%s*%s*\n", operation, name);
 				if(operation.toUpperCase().equals("DELETE")){

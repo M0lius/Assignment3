@@ -3,21 +3,27 @@
 package Assignment3;
 
 /******************************************************************************
-	  	* Class: Reader                                             				  *
+		* Class: Reader                                             				  *
 	  	* Purpose: Reads a file and Parses it										  *
 	  	* Returns: Nothing                                                               *
 	  	******************************************************************************/
 
 	  public class Reader //static class Reader 
 	  {
-//	  	public static boolean Tail(String command, int skips){
-//	  		int pointer = SkipInputs(command, skips);
-//	  		char now = command.charAt(pointer);
-//	  		if (now != ' '){
+		  
+	  	public static boolean Tail(String command, int skips){
+	  		int pointer = SkipInputs(command, skips);
+	  		if (pointer == -1){
+	  			return false;
+	  		} else {
+	  			return true;
+	  		}
+	  		//char now = command.charAt(pointer - 1);
+//	  		if (pointer < command.length()){
 //	  			return true;
 //	  		}
 //	  		return false;
-//	  	}
+	  	}
 		  
 		public static int SkipInputs(String command, int inputs)// assumes all previous inputs were valid and gathered 
 		{//returns a pointer to the beginning of the next input after # skipped
@@ -47,6 +53,10 @@ package Assignment3;
 		  			now = command.charAt(pointer); //checks current char
 		  		}
 		  	}	
+		  	
+		  	if(pointer >= (command.length() -1)){ //reached end while trying to skip
+	  			return -1; //error
+	  		}
 		  	
 			
 			return pointer;
