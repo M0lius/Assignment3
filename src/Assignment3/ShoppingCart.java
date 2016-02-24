@@ -31,8 +31,18 @@ class ShoppingCart
 			int weight, String opt1, String opt2 ) {
 		
 		switch( category.toUpperCase() ) {
-			case "GROCERIES": 	ShoppingCart.groceryList.add( new Groceries(name, price, weight, quantity, opt1) ); 		   break;
-			case "ELECTRONICS": ShoppingCart.electronicList.add( new Electronics(name, price, weight, quantity, opt1, opt2) ); break;
+			case "GROCERIES": 	
+				if( Groceries.validPerishability(opt1) ) {
+					System.out.println("invalid input.");
+					return;
+				}
+				ShoppingCart.groceryList.add( new Groceries(name, price, weight, quantity, opt1) ); 		   				   break;
+			case "ELECTRONICS": 
+				if( Electronics.validFrailty(opt1) ) {
+					System.out.println("invalid input.");
+					return;
+				}
+				ShoppingCart.electronicList.add( new Electronics(name, price, weight, quantity, opt1, opt2) ); break;
 			case "CLOTHING":	ShoppingCart.clothingList.add( new Clothing(name, price, weight, quantity) ); 				   break;
 		}
 	}
@@ -56,39 +66,47 @@ class ShoppingCart
 		int electronicRange = grocerySize + electronicSize;
 		
 		int shoppingCartLength = grocerySize + electronicSize + clothingSize;
-			
-		for( int x = 0; x < shoppingCartLength; x++ ) {
+		int x = 0;	// local parsers for Groceries, Electronics, and Clothing, respectively.
+		int y = 0;
+		int z = 0;	
+		
+		for( int w = 0; w < shoppingCartLength; w++ ) {
 			
 			// quantity, name, price after tax and shipping
 			// at the end: total shopping cart price
 			
 			String name  = "";
+			String state = ""; // electronics only
 			double price = 0;
 			int quantity = 0;
 			
-			if( x < grocerySize ) { 
+			
+			if( w < grocerySize ) { 
 				// Groceries
 				name 	 = ShoppingCart.groceryList.get(x).getName();
 				quantity = ShoppingCart.groceryList.get(x).getQuantity();		
 				price	 = ShoppingCart.groceryList.get(x).getPrice()*quantity 
 							+ ShoppingCart.groceryList.get(x).getFittingShippingCost()*quantity;
+				x++;
 			}
-			else if ( (x >= grocerySize) && (x < electronicRange) ) {
+			else if ( (w >= grocerySize) && (w < electronicRange) ) {
 				// Electronics
-				String state 	= ShoppingCart.electronicList.get(x).getState();
-				name 	 = ShoppingCart.electronicList.get(x).getName();
-				quantity = ShoppingCart.electronicList.get(x).getQuantity();
-				price	 = ShoppingCart.electronicList.get(x).getPrice()*quantity
-							+ ShoppingCart.electronicList.get(x).getFittingShippingCost()*quantity
-							+ ShoppingCart.electronicList.get(x).getSalesTax(state)*quantity;
+				state 	= ShoppingCart.electronicList.get(y).getState();
+				name 	 = ShoppingCart.electronicList.get(y).getName();
+				quantity = ShoppingCart.electronicList.get(y).getQuantity();
+				price	 = ShoppingCart.electronicList.get(y).getPrice()*quantity
+							+ ShoppingCart.electronicList.get(y).getFittingShippingCost()*quantity
+							+ ShoppingCart.electronicList.get(y).getSalesTax(state)*quantity;
+				y++;
 			}
-			else if ( (x >= electronicRange) && (x < shoppingCartLength) ) {
+			else if ( (w >= electronicRange) && (w < shoppingCartLength) ) {
 				// Clothing
-				name 	 = ShoppingCart.clothingList.get(x).getName();
-				quantity = ShoppingCart.clothingList.get(x).getQuantity();
-				price	 = ShoppingCart.clothingList.get(x).getPrice()*quantity
-							+ ShoppingCart.clothingList.get(x).getStandardShippingCost()*quantity
-							+ ShoppingCart.clothingList.get(x).getSalesTax()*quantity;
+				name 	 = ShoppingCart.clothingList.get(z).getName();
+				quantity = ShoppingCart.clothingList.get(z).getQuantity();
+				price	 = ShoppingCart.clothingList.get(z).getPrice()*quantity
+							+ ShoppingCart.clothingList.get(z).getStandardShippingCost()*quantity
+							+ ShoppingCart.clothingList.get(z).getSalesTax()*quantity;
+				z++;
 			}
 			
 			netPrice += price;

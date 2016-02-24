@@ -10,6 +10,8 @@ public class Electronics extends Item {
 	"ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"};
 
 	static String[] nonTaxableStates = new String[]{"TX", "NM", "VA", "AZ", "AK"};
+	static String[] validFrailCode   = new String[]{"F", "NF"};
+	
 	
 	public boolean fragile;
 	String state;
@@ -103,6 +105,16 @@ public class Electronics extends Item {
 	//*******
 	public static boolean validState(String stateIn) {
 		if( Arrays.asList(stateCodes).contains(stateIn.toUpperCase()) ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	//*******
+	public static boolean validFrailty(String frailIn) {
+		if( Arrays.asList(validFrailCode).contains(frailIn) ) {
 			return true;
 		}
 		else {

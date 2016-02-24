@@ -1,7 +1,10 @@
 package Assignment3;
 
+import java.util.Arrays;
+
 public class Groceries extends Item {
 
+	static String[] validPerishCode   = new String[]{"P", "NP"};
 	public boolean perishable;
 	
 	public Groceries(String name, double price, int weight, int quantity, String perishableString) {
@@ -44,6 +47,16 @@ public class Groceries extends Item {
 	public double getPremiumShippingCost() {
 		// premium shipping is an additional 20% over the standard charge
 		return ( this.getStandardShippingCost() * 1.20 );
+	}
+	
+	//*******
+	public static boolean validPerishability(String perishIn) {
+		if( Arrays.asList(validPerishCode).contains(perishIn) ) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 }
