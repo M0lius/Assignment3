@@ -32,13 +32,13 @@ class ShoppingCart
 		
 		switch( category.toUpperCase() ) {
 			case "GROCERIES": 	
-				if( Groceries.validPerishability(opt1) ) {
+				if( !Groceries.validPerishability(opt1) ) {
 					System.out.println("invalid input.");
 					return;
 				}
 				ShoppingCart.groceryList.add( new Groceries(name, price, weight, quantity, opt1) ); 		   				   break;
 			case "ELECTRONICS": 
-				if( Electronics.validFrailty(opt1) ) {
+				if( !Electronics.validFrailty(opt1) ) {
 					System.out.println("invalid input.");
 					return;
 				}

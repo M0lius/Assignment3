@@ -6,13 +6,3 @@ print
 insert groceries apple 250 1 1
 insert groceries cabbage 30 10 0
 insert electronics ps3 300 10 5 F WA
-
-//insert electronics WiiU 20.50 5 25 F TX
-//delete cats
-//print
-sudfafiflidsa
-//insert sdfjsdf 
-//insert clothing shirt 225 1 1 
-//insert clothing shirt 225 1 1.0 
-//print 
-
