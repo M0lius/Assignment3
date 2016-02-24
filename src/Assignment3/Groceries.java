@@ -8,11 +8,11 @@ public class Groceries extends Item {
 		super(name, price, weight, quantity);
 		// TODO Auto-generated constructor stub
 		
-		if(perishableString == "P")
+		if(perishableString.toUpperCase() == "P")
 		{
 			perishable = true;
 		}
-		if(perishableString == "NP")
+		if(perishableString.toUpperCase() == "NP")
 		{
 			perishable = false;
 		}

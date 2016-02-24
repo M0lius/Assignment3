@@ -23,11 +23,11 @@ public class Electronics extends Item {
 		// assuming valid state input
 		this.setState( state );
 		
-		if(fragileString == "F")
+		if(fragileString.toUpperCase() == "F")
 		{
 			fragile = true;
 		}
-		else if(fragileString == "NF")
+		else if(fragileString.toUpperCase() == "NF")
 		{
 			fragile = false;
 		}
