@@ -1,6 +1,6 @@
 //<operation> <category> <name> <price> <quantity> <weight> <optional field1> <optional field2>
 insert groceries apple 2 1 1 P
 insert electronics ps3 300 10 5 F TX
-insert clothing jordans 500 2 4 
+insert clothing jordans 500 2 4   
 ////
 print

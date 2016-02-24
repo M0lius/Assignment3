@@ -1,3 +1,9 @@
+/* NAMES: MARIO MOLINA
+ * AND:   ETHAN MILLER
+ * TA:    JO EGNER
+ * ASSIGNMENT 3 :Shopping Cart One
+ * */
+
 package Assignment3;
 
 import java.util.Arrays;
