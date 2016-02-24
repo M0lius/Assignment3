@@ -24,7 +24,7 @@ public class Groceries extends Item {
 
 		// Groceries special attributes:
 	// perishable groceries require premium shipping
-	// groceries incur no sales 
+	// groceries incur no sales tax
 	
 	//*******
 	public double getFittingShippingCost() {
