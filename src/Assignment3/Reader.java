@@ -21,8 +21,13 @@ package Assignment3;
 		  
 		public static int SkipInputs(String command, int inputs)// assumes all previous inputs were valid and gathered 
 		{//returns a pointer to the beginning of the next input after # skipped
-			int pointer = 0;
-	  		char now = command.charAt(pointer); //checks current char
+			int pointer = 0; 
+			
+	  		if(pointer > (command.length() -1)){ //execption of blank line
+	  			return -1; //error
+	  		}
+	  		
+			char now = command.charAt(pointer); //checks current char
 	  		
 	  		while (now == ' ' && pointer < (command.length() - 1)){ //skips initial space
 	  			pointer += 1;
@@ -34,11 +39,15 @@ package Assignment3;
 		  			pointer += 1;
 		  			now = command.charAt(pointer);
 		  		}
+		  		
+		  		if(now != ' '){return -1;} //reached the end prematurely 
+		  		
 		  		while (now == ' ' && pointer < (command.length() - 1)){ //goes to word start
 		  			pointer += 1;
 		  			now = command.charAt(pointer); //checks current char
 		  		}
 		  	}	
+		  	
 			
 			return pointer;
 		}
@@ -46,7 +55,12 @@ package Assignment3;
 	  	public static String GetOperation (String command, int skip) //reads for the Operation
 	  	{ 
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
+	  		if (beginning == -1) {return "";}//already at the end of string
+	  		
 	  		int end = beginning; //end of the word
+	  		
+	  		if(beginning > (command.length() - 1)){return "";} //exception of blank line
+	  		
 	  		char now = command.charAt(beginning); //checks current char
 
 	  		while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
@@ -60,6 +74,8 @@ package Assignment3;
 	  	public static String GetCategory (String command, int skip) //reads for....
 	  	{ 
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
+	  		if (beginning == -1) {return "";}//already at the end of string
+	  		
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
@@ -74,6 +90,8 @@ package Assignment3;
 	  	public static String GetName (String command, int skip) //reads for....
 	  	{ 
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
+	  		if (beginning == -1) {return "";}//already at the end of string
+	  		
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
@@ -88,6 +106,8 @@ package Assignment3;
 	  	public static double GetPrice (String command, int skip) //reads for....
 	  	{ 
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
+	  		if (beginning == -1) {return -1;}//already at the end of string
+	  		
 	  		int end = beginning; //end of the word
 	  		int decimals = 0; //amount of decimals found in the double. It shouldn't be more than 1
 	  		
@@ -110,6 +130,8 @@ package Assignment3;
 	  	public static int GetQuantity (String command, int skip) //reads for....
 	  	{ 
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
+	  		if (beginning == -1) {return -1;}//already at the end of string
+
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
@@ -124,6 +146,8 @@ package Assignment3;
 	  	public static int GetWeight (String command, int skip) //reads for....
 	  	{ 
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
+	  		if (beginning == -1) {return -1;}//already at the end of string
+
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
@@ -138,6 +162,8 @@ package Assignment3;
 	  	public static String GetOField1 (String command, int skip) //reads for....
 	  	{ 
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
+	  		if (beginning == -1) {return "";}//already at the end of string
+	  		
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
@@ -151,6 +177,8 @@ package Assignment3;
 	  	public static String GetOField2 (String command, int skip) //reads for....
 	  	{ 
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
+	  		if (beginning == -1) {return "";}//already at the end of string
+	  		
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
