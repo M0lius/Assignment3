@@ -1,10 +1,13 @@
 
 package Assignment3;
+import java.util.*;
 
+import java.text.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.text.Collator;
 
 class ShoppingCart
 {
@@ -18,6 +21,8 @@ class ShoppingCart
 	static List<Groceries>   groceryList	 = new ArrayList<Groceries>();
 	static List<Electronics> electronicList  = new ArrayList<Electronics>();
 	static List<Clothing>    clothingList	 = new ArrayList<Clothing>();
+	
+	static List<Item> 		shoppingList	 = new ArrayList<Item>();
 	
 	
 	/*
@@ -33,11 +38,66 @@ class ShoppingCart
 	static void insert( String category, String name, double price, int quantity, 
 			int weight, String opt1, String opt2 ) {
 		
+		
+		switch( category.toUpperCase() ) {
+			case "GROCERIES":   ShoppingCart.alphabeticInsert( category, new Groceries(name, price, weight, quantity, opt1) );           break;
+			case "ELECTRONICS": ShoppingCart.alphabeticInsert( category, new Electronics(name, price, weight, quantity, opt1, opt2) );   break;
+			case "CLOTHING":	ShoppingCart.alphabeticInsert( category, new Clothing(name, price, weight, quantity) ); 				 break;
+		}
+		
+		/*
 		switch( category.toUpperCase() ) {
 			case "GROCERIES":   ShoppingCart.groceryList.add( new Groceries(name, price, weight, quantity, opt1) ); 		   break;
 			case "ELECTRONICS": ShoppingCart.electronicList.add( new Electronics(name, price, weight, quantity, opt1, opt2) ); break;
 			case "CLOTHING":	ShoppingCart.clothingList.add( new Clothing(name, price, weight, quantity) ); 				   break;
+		}*/
+	}
+	
+	
+	static void alphabeticInsert( String category, Item itemIn ) {
+		// ascii uppercase alphabetic range: 0x41 - 0x5a (inclusive)
+		// ascii lowercase alphabetic range: 0x61 - 0x7a (inclusive)
+		
+		char firstItemInLetter = itemIn.getName().toCharArray()[0];
+		
+		switch(category) {
+		
+		case "GROCERIES":	
+			int sort = itemIn.getName().compareToIgnoreCase( ShoppingCart.groceryList.get(x).getName() );	
+			
+		case "ELECTRONICS":	
+			int sort = itemIn.getName().compareToIgnoreCase( itemIn.getName() );
+			
+		case "CLOTHING":	
+			int sort = itemIn.getName().compareToIgnoreCase( itemIn.getName() );
+			
 		}
+		
+		/*
+		for( int x = 0; x < shoppingList.size(); x++ ) {
+		
+			
+				//itemIn.getName()
+//			shoppingList.get(x).getName()
+			int sort = itemIn.getName().compareToIgnoreCase( itemIn.getName() );			
+			//-1 less than this string
+			// 0 same
+			// 1 greater
+			
+			if( sort==0 ) // names are equal case insensitive
+			{
+				char firstListIndexCharacter = shoppingList.get(x).getName().toCharArray()[0];
+				
+				if(firstListIndexCharacter >)
+				shoppingList.add(x, itemIn);
+				
+			}
+			else if( sort==-1 )
+			
+			
+			//if( firstLetter < )
+		} */
+			
 	}
 	
 	//*******************
