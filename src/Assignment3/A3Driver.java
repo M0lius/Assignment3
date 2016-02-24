@@ -99,7 +99,7 @@ public class A3Driver
 				String oField2 = "";
 				if(category.toUpperCase().equals("GROCERIES")){
 					oField1 = Reader.GetOField1(s, skip);
-					if (oField1.equals(null) || oField1.equals("")) {
+					if (oField1.equals(null) || oField1.equals("") || Groceries.validPerishability(oField1)) {
 						System.out.println("Invalid Optional Field1");
 						return;
 					}
@@ -109,7 +109,7 @@ public class A3Driver
 					
 				} else if(category.toUpperCase().equals("ELECTRONICS")){
 					oField1 = Reader.GetOField1(s, skip);
-					if (oField1.equals(null) || oField1.equals("")) {
+					if (oField1.equals(null) || oField1.equals("") || Electronics.validFrailty(oField1)) {
 						System.out.println("Invalid Optional Field1");
 						return;
 					}
