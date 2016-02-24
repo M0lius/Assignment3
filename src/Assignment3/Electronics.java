@@ -12,12 +12,16 @@ public class Electronics extends Item {
 	static String[] nonTaxableStates = new String[]{"TX", "NM", "VA", "AZ", "AK"};
 	
 	public boolean fragile;
+	String state;
 	
 	//*****
 	//Constructor
-	public Electronics(String name, double price, double weight, int quantity, String fragileString) {
+	public Electronics(String name, double price, double weight, int quantity, String fragileString, String state) {
 		super(name, price, weight, quantity);
 		// TODO Auto-generated constructor stub
+		
+		// assuming valid state input
+		this.setState( state );
 		
 		if(fragileString == "F")
 		{
@@ -35,12 +39,20 @@ public class Electronics extends Item {
 		return fragile;
 	}
 	
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+	
 		// Electronics special attributes:
 	// fragile electronics require premium shipping
 	// sales tax is 10% for clothing and electronics 
 	// premium shipping is and additional 20% over standard shipping
 	// standard shipping is (20*weight)*quantity
-	
+
 	//*******
 	public double getSalesTax( String stateTax ) {
 		
