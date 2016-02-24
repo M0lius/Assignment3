@@ -125,7 +125,7 @@ public class A3Driver
 				} 				
 				
 				System.out.printf("*%s*%s*%s*%.2f*%d*%d*%s*%s*\n", operation, category, name, price, quantity, weight, oField1, oField2);
-				//TODO RUN INSERT
+				ShoppingCart.insert(category, name, price, quantity, weight, oField1, oField2);
 				
 			} else if (operation.toUpperCase().equals("UPDATE")){
 				String name = Reader.GetName(s, skip);
@@ -143,11 +143,11 @@ public class A3Driver
 				skip += 1;
 				
 				System.out.printf("*%s*%s*%d*\n", operation, name, quantity);
-				//TODO RUN UPDATE
+				ShoppingCart.update(name, quantity);
 				
 			} else if(operation.toUpperCase().equals("PRINT")){
 				System.out.println("Print!");
-				//TODO run Print
+				ShoppingCart.print();
 				
 			} else {
 				String name = Reader.GetName(s, skip);
@@ -159,10 +159,10 @@ public class A3Driver
 				
 				System.out.printf("*%s*%s*\n", operation, name);
 				if(operation.toUpperCase().equals("DELETE")){
-					//TODO RUN DELETE
+					ShoppingCart.delete(name);
 				}
 				else{
-					//TODO RUN SEARCH
+					ShoppingCart.search(name);
 				}
 				
 			}
