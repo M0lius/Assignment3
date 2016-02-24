@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// SUPERSAYAN FINAL FORM
-
 class ShoppingCart
 {
 	//*******
