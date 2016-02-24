@@ -46,53 +46,110 @@ class ShoppingCart
 		 * Output of the shopping cart should be to the standard output stream (screen) and should be 
 		 * appropriately formatted and labeled for readability.
 		 * */
+	
+		int grocerySize    = ShoppingCart.groceryList.size();
+		int electronicSize = ShoppingCart.electronicList.size();
+		int clothingSize   = ShoppingCart.clothingList.size();
+		
+		int shoppingCartLength = grocerySize + electronicSize + clothingSize;
+			
+		for( int x = 0; x < shoppingCartLength; x++ ) {
+			
+			if( x < grocerySize ) {
+				
+			}
+//			else if ( (x >= grocerySize) && 
+			
+		}
 	}
 	
-	//*******
-	static void update( String name, int quantity ) {
+	//*************************************************
+	static void update( String nameIn, int quantity ) {
 		// updates the quantity field for the first occurrence matching name
 		// output the name and new quantity value for that item on the screen
 		
-		try {
-			int updateAt = ShoppingCart.groceryNameFind(nameIn, searchStart, searchEnd)
+		try {	// Groceries
+			int updateAt = ShoppingCart.groceryNameFind( nameIn, 0, ShoppingCart.groceryList.size() );
+			ShoppingCart.groceryList.get( updateAt ).setQuantity( quantity );
+			System.out.println("Updated first occurance of item " + nameIn + " to have quantity " 
+						+ ShoppingCart.groceryList.get( updateAt ).getQuantity() + ".");
+			return;
 		}
-		catch(java.)
+		catch(java.lang.IndexOutOfBoundsException e) {} // no grocery with that name
+		
+		try {	// Electronics
+			int updateAt = ShoppingCart.electronicNameFind( nameIn, 0, ShoppingCart.electronicList.size() );
+			ShoppingCart.electronicList.get( updateAt ).setQuantity( quantity );
+			System.out.println("Updated first occurance of item " + nameIn + " to have quantity " 
+						+ ShoppingCart.electronicList.get( updateAt ).getQuantity() + ".");
+			return;
+		}
+		catch(java.lang.IndexOutOfBoundsException e) {}
+		
+		try {	// Clothing
+			int updateAt = ShoppingCart.clothingNameFind( nameIn, 0, ShoppingCart.clothingList.size() );
+			ShoppingCart.clothingList.get( updateAt ).setQuantity( quantity );
+			System.out.println("Updated first occurance of item " + nameIn + " to have quantity " 
+						+ ShoppingCart.clothingList.get( updateAt ).getQuantity() + ".");
+			return;
+		}
+		catch(java.lang.IndexOutOfBoundsException e) {} // no grocery with that name
 	}
 	
-	//*******
+	//***********************************
 	static void delete( String nameIn ) {
 		// deletes all entities with a matching name (case sensitive)
 		// output to the screen the number of objects deleted
 		
-		int deletedItems = 0;
-		
+		int deletedItemsCount = 0;
 
-		try {
-			int removeAt = ShoppingCart.groceryNameFind( nameIn );
-			groceryList.remove( removeAt );
-			deletedItems++;
+		int numGroceryMatches    = ShoppingCart.numGroceryNameMatches(    nameIn);
+		int numElectronicMatches = ShoppingCart.numElectronicNameMatches( nameIn);
+		int numClothingMatches   = ShoppingCart.numGroceryNameMatches(    nameIn);
+		
+		int lastMatchPoint		= 0;
+		
+		// Groceries
+		for( int x = 0; x < numGroceryMatches; x++ ) {
+			
+			int deleteAt = ShoppingCart.groceryNameFind(nameIn, lastMatchPoint, ShoppingCart.groceryList.size() );
+			
+			if( deleteAt != -1 ) {
+				lastMatchPoint = deleteAt;
+				ShoppingCart.groceryList.remove( deleteAt );
+				deletedItemsCount++;
+			}
 		}
-		catch(java.lang.IndexOutOfBoundsException e) {} // no grocery found  --- test these well
 		
-		try {
-			int removeAt = ShoppingCart.electronicNameFind( nameIn );
-			electronicList.remove( removeAt );
-			deletedItems++;
+		// Electronics
+		for( int x = 0; x < numElectronicMatches; x++ ) {
+			
+			int deleteAt = ShoppingCart.groceryNameFind(nameIn, lastMatchPoint, ShoppingCart.electronicList.size() );
+			
+			if( deleteAt != -1 ) {
+				lastMatchPoint = deleteAt;
+				ShoppingCart.electronicList.remove( deleteAt );
+				deletedItemsCount++;
+			}
 		}
-		catch(java.lang.IndexOutOfBoundsException e) {} // no electronic found
 		
-		try {
-			int removeAt = ShoppingCart.clothingNameFind( nameIn );
-			clothingList.remove( removeAt );
-			deletedItems++;
+		// Clothing
+		for( int x = 0; x < numClothingMatches; x++ ) {
+			
+			int deleteAt = ShoppingCart.groceryNameFind(nameIn, lastMatchPoint, ShoppingCart.clothingList.size() );
+			
+			if( deleteAt != -1 ) {
+				lastMatchPoint = deleteAt;
+				ShoppingCart.clothingList.remove( deleteAt );
+				deletedItemsCount++;
+			}
 		}
-		catch(java.lang.IndexOutOfBoundsException e) {} // no grocery found
-		
-		
-		System.out.println("Deleted " + deletedItems + " items with the name " + nameIn + ".");
+
+
+		System.out.println("Deleted " + deletedItemsCount + " items with the name " + nameIn + ".");
 	}
 	
-	//********
+	//***********************************
 	static void search( String nameIn ) { 
 		// names are case sensitive
 		// searches for all objects with the same name and outputs the number of objects found on the screen
