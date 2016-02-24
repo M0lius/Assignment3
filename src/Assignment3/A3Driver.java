@@ -82,7 +82,7 @@ public class A3Driver
 				skip += 1;
 				
 				int quantity = Reader.GetQuantity(s, skip);
-				if (quantity <= 0){
+				if (quantity < 0){
 					System.out.println("Invalid Quantity");
 					return;
 				}
@@ -136,7 +136,7 @@ public class A3Driver
 				skip += 1;
 				
 				int quantity = Reader.GetQuantity(s, skip);
-				if (quantity <= 0){
+				if (quantity < 0){
 					System.out.println("Invalid Quantity");
 					return;
 				}
