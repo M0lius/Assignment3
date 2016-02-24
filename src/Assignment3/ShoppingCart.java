@@ -105,10 +105,10 @@ class ShoppingCart
 			netPrice += price;
 			String items = (quantity > 1) ? " items " : " item ";
 			
-			System.out.println("The " + quantity + " " + name + items + "costs $" + price + ", including shipping and tax.");
+			System.out.println("The " + quantity + " " + name + items + "costs $" + df2.format(price) + ", including shipping and tax.");
 		}
 		
-		System.out.println("The Shopping-Cart items cost $" + netPrice + " total.");
+		System.out.println("The Shopping-Cart items cost $" + df2.format(netPrice) + " total.");
 	}
 	
 	//*************************************************
