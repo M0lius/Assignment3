@@ -2,7 +2,7 @@ package Assignment3;
 
 public class Clothing extends Item {
 
-	public Clothing(String name, double price, double weight, int quantity) {
+	public Clothing(String name, double price, int weight, int quantity) {
 		super(name, price, weight, quantity);
 		// TODO Auto-generated constructor stub
 	}

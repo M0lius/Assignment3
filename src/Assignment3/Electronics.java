@@ -16,7 +16,7 @@ public class Electronics extends Item {
 	
 	//*****
 	//Constructor
-	public Electronics(String name, double price, double weight, int quantity, String fragileString, String state) {
+	public Electronics(String name, double price, int weight, int quantity, String fragileString, String state) {
 		super(name, price, weight, quantity);
 		// TODO Auto-generated constructor stub
 		

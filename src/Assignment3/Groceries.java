@@ -4,7 +4,7 @@ public class Groceries extends Item {
 
 	public boolean perishable;
 	
-	public Groceries(String name, double price, double weight, int quantity, String perishableString) {
+	public Groceries(String name, double price, int weight, int quantity, String perishableString) {
 		super(name, price, weight, quantity);
 		// TODO Auto-generated constructor stub
 		

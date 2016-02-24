@@ -7,7 +7,7 @@ public class Item
 // You will need a constructor (Why?). Create it here.
 	public String name;
 	public double price;
-	public double weight;
+	public int weight;
 	
 	public int quantity;
 	
@@ -35,7 +35,7 @@ public class Item
 		return price;
 	}
 
-	public double getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 	
@@ -45,7 +45,7 @@ public class Item
 		return ( (20*this.getWeight()) * this.getQuantity() );
 	}
 
-	public Item(String name, double price, double weight, int quantity) {
+	public Item(String name, double price, int weight, int quantity) {
 		this.name = name;
 		this.price = price;
 		this.weight = weight;
