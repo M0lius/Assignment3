@@ -1,15 +1,31 @@
 //<operation> <category> <name> <price> <quantity> <weight> <optional field1> <optional field2>
-insert groceries apple 2 1 1 p  
-// ^doesn't like P groceries
-insert clothing Verygood 1 1 1
-//^ Invalid weight (particularly the 1 1 1 combo) -- also it might not like tabs (idk if that's important)
-insert clothing Apples 7 8 9
-//^ Invalid weight (doesn't like capital first)
+insert groceries apple 0 0 0 p  
+// ^doesn't like lP groceries
 
+////////////////////////////// -- all between comment lines had "Invalid Weight"
+insert clothing applescloth  4 5 6
+insert clothing zenoncloth   1 2 3
+insert clothing Zenoncloth 1 3 5
+insert clothing badbadcloth 1 7 8
+insert clothing itacceptsnothingcloth 1 2 3
+//////////////////////////////
 
-insert clothing apples  1 2 3 
-insert clothing apples  4 5 6
-insert clothing zenon   1 2 3
-insert clothing Zenon 1 3 5
-insert clothing badbad 1 7 8
+insert groceries    a  1 2 3 NP
+insert groceries e   1 2 3 NP
+insert groceries   h  1 2 3 NP
+insert groceries   i   1 2 3 NP
+insert groceries l 1 1 1 NP
+
+insert electronics    b  1 2 3 NF NV
+insert electronics c   1 2 3 F aZ
+insert electronics   j  1 2 3 Nf Tx
+insert electronics   m   1 2 3 f tX
+insert electronics o 1 1 1 nf tx
+
+insert clothing    d  1 2 3 
+insert clothing f   1 2 3 
+insert clothing   g  1 2 3 
+insert clothing   k   1 2 3 
+insert clothing n 1 1 1 
+
 print

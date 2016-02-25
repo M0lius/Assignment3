@@ -57,7 +57,7 @@ public class Groceries extends Item {
 	
 	//*******
 	public static boolean validPerishability(String perishIn) {
-		if( Arrays.asList(validPerishCode).contains(perishIn) ) {
+		if( Arrays.asList(validPerishCode).contains(perishIn.toUpperCase()) ) {
 			return true;
 		}
 		else {
