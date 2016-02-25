@@ -3,9 +3,9 @@ insert groceries apple 0 0 0 p
 // ^doesn't like lP groceries
 
 ////////////////////////////// -- all between comment lines had "Invalid Weight"
-insert clothing applescloth  4 5 6
-insert clothing zenoncloth   1 2 3   adsads
-insert clothing Zenoncloth 1 3 5  
+insert clothing applescloth  4 5. 6.0
+insert clothing zenoncloth   1 2 3.00   adsads
+insert clothing Zenoncloth 1 3.1 5  
 insert clothing badbadcloth 1 7 8   
 insert clothing itacceptsnothingcloth 1 2 3     
 //////////////////////////////

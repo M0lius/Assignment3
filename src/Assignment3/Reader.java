@@ -146,36 +146,61 @@ package Assignment3;
 	  	
 	  	public static int GetQuantity (String command, int skip) //reads for....
 	  	{ 
+	  		boolean decimalfound = false;
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
 	  		if (beginning == -1) {return -1;}//already at the end of string
 
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
-		  	while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
-		  			end += 1;
-		  			if(!Character.isDigit(now)){return -1;}
-		  			now = command.charAt(end);
-		  	}
+	  		while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
+	  			end += 1;
+	  			
+	  			if(!Character.isDigit(now) && decimalfound == false){
+	  				if(now == '.' ){
+	  					decimalfound = true;
+	  				} else {
+	  					return -1;
+	  				}
+	  			} else if(decimalfound == true){
+	  				if(now != '0'){
+	  					return -1;
+	  				}
+	  			} 	  			
+	  			now = command.charAt(end);
+	  		}
 		  	if(now != ' '){end += 1; if(!Character.isDigit(now)){return -1;}} //incase while loop left due to reaching end of string
-	  		return Integer.parseInt(command.substring(beginning, end));
+	  		return Integer.parseInt(command.substring(beginning, end).replaceAll("[^\\d]", ""));
 	  	}
 	  	
 	  	public static int GetWeight (String command, int skip) //reads for....
 	  	{ 
+	  		boolean decimalfound = false;
+	  		
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
 	  		if (beginning == -1) {return -1;}//already at the end of string
 
 	  		int end = beginning; //end of the word
 	  		
 	  		char now = command.charAt(beginning); //checks current char
-		  	while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
-		  			end += 1;
-		  			if(!Character.isDigit(now)){return -1;}
-		  			now = command.charAt(end);
-		  	}
+	  		while (now != ' ' && end < (command.length() - 1)){//up too the first space it sees
+	  			end += 1;
+	  			
+	  			if(!Character.isDigit(now) && decimalfound == false){
+	  				if(now == '.' ){
+	  					decimalfound = true;
+	  				} else {
+	  					return -1;
+	  				}
+	  			} else if(decimalfound == true){
+	  				if(now != '0'){
+	  					return -1;
+	  				}
+	  			} 	  			
+	  			now = command.charAt(end);
+	  		}
 		  	if(now != ' '){end += 1; if(!Character.isDigit(now)){return -1;}} //incase while loop left due to reaching end of string
-	  		return Integer.parseInt(command.substring(beginning, end));
+	  		return Integer.parseInt(command.substring(beginning, end).replaceAll("[^\\d]", ""));
 	  	}
 	  	
 	  	public static String GetOField1 (String command, int skip) //reads for....
