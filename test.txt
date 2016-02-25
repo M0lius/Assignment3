@@ -1,10 +1,15 @@
 //<operation> <category> <name> <price> <quantity> <weight> <optional field1> <optional field2>
-insert groceries apple 2 1 1 P
-insert electronics ps3 300 10 5 F TX
-<<<<<<< HEAD
-insert clothing jordans 500 2 4   
-////
-=======
-insert clothing jordans 500 2 4
->>>>>>> branch 'trueMaster' of https://github.com/M0lius/Assignment3.git
+insert groceries apple 2 1 1 p  
+// ^doesn't like P groceries
+insert clothing Verygood 1 1 1
+//^ Invalid weight (particularly the 1 1 1 combo) -- also it might not like tabs (idk if that's important)
+insert clothing Apples 7 8 9
+//^ Invalid weight (doesn't like capital first)
+
+
+insert clothing apples  1 2 3 
+insert clothing apples  4 5 6
+insert clothing zenon   1 2 3
+insert clothing Zenon 1 3 5
+insert clothing badbad 1 7 8
 print

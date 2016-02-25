@@ -159,6 +159,7 @@ package Assignment3;
 		  	if(now != ' '){end += 1; if(!Character.isDigit(now)){return -1;}} //incase while loop left due to reaching end of string
 	  		return Integer.parseInt(command.substring(beginning, end));
 	  	}
+	  	
 	  	public static int GetWeight (String command, int skip) //reads for....
 	  	{ 
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
@@ -175,6 +176,7 @@ package Assignment3;
 		  	if(now != ' '){end += 1; if(!Character.isDigit(now)){return -1;}} //incase while loop left due to reaching end of string
 	  		return Integer.parseInt(command.substring(beginning, end));
 	  	}
+	  	
 	  	public static String GetOField1 (String command, int skip) //reads for....
 	  	{ 
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
