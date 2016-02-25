@@ -147,6 +147,7 @@ package Assignment3;
 	  	public static int GetQuantity (String command, int skip) //reads for....
 	  	{ 
 	  		boolean decimalfound = false;
+	  		int decimalpointer = 0;
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
 	  		if (beginning == -1) {return -1;}//already at the end of string
 
@@ -159,6 +160,7 @@ package Assignment3;
 	  			if(!Character.isDigit(now) && decimalfound == false){
 	  				if(now == '.' ){
 	  					decimalfound = true;
+	  					decimalpointer = end;
 	  				} else {
 	  					return -1;
 	  				}
@@ -170,12 +172,16 @@ package Assignment3;
 	  			now = command.charAt(end);
 	  		}
 		  	if(now != ' '){end += 1; if(!Character.isDigit(now)){return -1;}} //incase while loop left due to reaching end of string
-	  		return Integer.parseInt(command.substring(beginning, end).replaceAll("[^\\d]", ""));
+		  	if (decimalfound == true){ return Integer.parseInt(command.substring(beginning, decimalpointer).replaceAll("[^\\d]", ""));}
+		  	else {
+	  		return Integer.parseInt(command.substring(beginning, end));
+		  	}
 	  	}
 	  	
 	  	public static int GetWeight (String command, int skip) //reads for....
 	  	{ 
 	  		boolean decimalfound = false;
+	  		int decimalpointer = 0;
 	  		
 	  		int beginning = Reader.SkipInputs(command, skip); //beginning of the word
 	  		if (beginning == -1) {return -1;}//already at the end of string
@@ -189,6 +195,7 @@ package Assignment3;
 	  			if(!Character.isDigit(now) && decimalfound == false){
 	  				if(now == '.' ){
 	  					decimalfound = true;
+	  					decimalpointer = end;
 	  				} else {
 	  					return -1;
 	  				}
@@ -200,7 +207,10 @@ package Assignment3;
 	  			now = command.charAt(end);
 	  		}
 		  	if(now != ' '){end += 1; if(!Character.isDigit(now)){return -1;}} //incase while loop left due to reaching end of string
-	  		return Integer.parseInt(command.substring(beginning, end).replaceAll("[^\\d]", ""));
+		  	if (decimalfound == true){ return Integer.parseInt(command.substring(beginning, decimalpointer).replaceAll("[^\\d]", ""));}
+		  	else {
+	  		return Integer.parseInt(command.substring(beginning, end));
+		  	}
 	  	}
 	  	
 	  	public static String GetOField1 (String command, int skip) //reads for....
