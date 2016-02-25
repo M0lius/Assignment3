@@ -22,7 +22,12 @@ package Assignment3;
 	  		if (pointer == -1){
 	  			return false;
 	  		} else {
+	  			char now = command.charAt(pointer);
+	  			if (now == ' '){
+	  				return false;
+	  			} else{
 	  			return true;
+	  			}
 	  		}
 	  		//char now = command.charAt(pointer - 1);
 //	  		if (pointer < command.length()){
@@ -59,11 +64,7 @@ package Assignment3;
 		  			now = command.charAt(pointer); //checks current char
 		  		}
 		  	}	
-		  	
-		  	if(pointer >= (command.length() -1)){ //reached end while trying to skip
-	  			return -1; //error
-	  		}
-		  	
+		  			  	
 			
 			return pointer;
 		}
