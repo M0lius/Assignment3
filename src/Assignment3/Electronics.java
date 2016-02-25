@@ -120,7 +120,7 @@ public class Electronics extends Item {
 	
 	//*******
 	public static boolean validFrailty(String frailIn) {
-		if( Arrays.asList(validFrailCode).contains(frailIn) ) {
+		if( Arrays.asList(validFrailCode).contains(frailIn.toUpperCase()) ) {
 			return true;
 		}
 		else {
